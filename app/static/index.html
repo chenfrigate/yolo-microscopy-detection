@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Ultralytics YOLOv8 目标检测</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { color: #333; }
+    #result { margin-top: 20px; }
+    img { max-width: 100%; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <h1>上传图片进行目标检测 (Ultralytics YOLOv8)</h1>
+  <form id="uploadForm">
+    <input type="file" id="imageInput" name="file" accept="image/*" required>
+    <button type="submit">上传</button>
+  </form>
+  
+  <div id="result" style="display:none;">
+    <h2>标注结果</h2>
+    <img id="resultImage" src="" alt="标注后的图片">
+  </div>
+
+  <script>
+    document.getElementById('uploadForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const fileInput = document.getElementById('imageInput');
+      if (fileInput.files.length === 0) {
+        alert('请选择一张图片');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('file', fileInput.files[0]);
+
+      // 将此处URL替换为你实际的后端地址，如 http://your-server.com/upload
+      fetch('http://127.0.0.1:5000/upload', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('上传失败');
+        }
+        return response.blob();
+      })
+      .then(blob => {
+        const imageUrl = URL.createObjectURL(blob);
+        document.getElementById('resultImage').src = imageUrl;
+        document.getElementById('result').style.display = 'block';
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('图片上传或推理失败，请查看控制台');
+      });
+    });
+  </script>
+</body>
+</html>
