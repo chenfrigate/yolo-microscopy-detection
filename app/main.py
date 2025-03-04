@@ -9,6 +9,8 @@ from yolo_inference import load_yolo_model, detect_objects, annotate_image
 
 app = FastAPI()
 
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
 # 如果前后端分离，且需要跨域访问，可开启CORS
 app.add_middleware(
     CORSMiddleware,
