@@ -1,5 +1,5 @@
 fastapi==0.95.2
-uvicorn==0.22.0
+uvicorn
 ultralytics==8.0.57
 opencv-python==4.7.0.72
 numpy==1.24.2
