@@ -21,7 +21,7 @@ app.add_middleware(
 )
 
 # 在启动时加载 YOLO 模型
-model = load_yolo_model("yolov8n.pt")
+model = load_yolo_model("/content/yolo-microscopy-detection/runs/detect/train7/weights/best.pt")
 
 @app.get("/")
 def home():
