@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Ultralytics YOLOv8 目标检测</title>
+  <title>生物相检测</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 20px; }
     h1 { color: #333; }
@@ -11,7 +11,7 @@
   </style>
 </head>
 <body>
-  <h1>上传图片进行目标检测 (Ultralytics YOLOv8)</h1>
+  <h1>上传镜检照片进行生物相检测 </h1>
   <form id="uploadForm">
     <input type="file" id="imageInput" name="file" accept="image/*" required>
     <button type="submit">上传</button>
@@ -36,7 +36,7 @@
       formData.append('file', fileInput.files[0]);
 
       // 将此处URL替换为你实际的后端地址，如 http://your-server.com/upload
-      fetch('http://127.0.0.1:5000/upload', {
+      fetch('https://8fc3-104-199-189-30.ngrok-free.app/upload', {
         method: 'POST',
         body: formData
       })
